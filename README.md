@@ -62,10 +62,51 @@ print(predictions)  # [2, 0] (example output)
 | File | Description |
 |------|-------------|
 | `sentiment_training.py` | Training script for fine-tuning the model |
-| `inference_script.py` | Local inference using saved model directory |
+| `inference_script.py` | CSV batch inference with configurable row limits |
 | `snowflake_inference.py` | Snowflake ML-ready inference script |
 | `push_to_hf.py` | Script to upload model to Hugging Face |
 | `generate_graphs.py` | Visualizations for model performance |
+
+---
+
+## CSV Batch Inference
+
+Analyze sentiment on CSV files and output results with a new `SENTIMENT_SCORE` column.
+
+### Configuration
+
+Edit the settings at the bottom of `inference_script.py`:
+
+```python
+# ==================== CONFIGURATION ====================
+INPUT_CSV = "All XPI Comments filtered (2).csv"
+OUTPUT_FOLDER = "sentiment_output"
+
+# Set MAX_ROWS to limit processing for testing (e.g., 1000, 5000)
+# Set to None to process ALL rows
+MAX_ROWS = 1000  # Change this to None to process all rows
+
+BATCH_SIZE = 100  # Number of comments per batch
+# =======================================================
+```
+
+### Run Inference
+
+```bash
+python inference_script.py
+```
+
+### Output
+
+- Results are saved to `sentiment_output/` folder
+- Output filename includes row count when limited (e.g., `*_sentiment_1000rows.csv`)
+- The 5th column (`COMMENT_BODY`) is analyzed and `SENTIMENT_SCORE` is added as the 7th column
+
+### Testing First
+
+1. Set `MAX_ROWS = 1000` (or 5000) to test on a subset
+2. Verify the output in `sentiment_output/`
+3. Set `MAX_ROWS = None` to process all rows
 
 ---
 
