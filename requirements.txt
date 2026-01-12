@@ -1,0 +1,9 @@
+setfit
+sentence-transformers
+scikit-learn
+pandas
+numpy
+torch
+matplotlib
+seaborn
+datasets
