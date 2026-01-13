@@ -18,15 +18,15 @@ from datasets import Dataset
 from sentence_transformers.losses import CosineSimilarityLoss
 
 # Configuration
-TRAIN_DATA_PATH = "data/setfit_training_data.csv"
-TEST_DATA_PATH = "data/balanced_data_medium.csv"
+TRAIN_DATA_PATH = "data/training.csv"
+TEST_DATA_PATH = "data/test.csv"
 MODEL_OUTPUT_DIR = "models/setfit_sentiment_model_safetensors"
 CONFUSION_MATRIX_OUTPUT_DIR = "output/model_visualizations"
-#BASE_MODEL_NAME = "BAAI/bge-base-en-v1.5"
+BASE_MODEL_NAME = "BAAI/bge-base-en-v1.5"
 #BASE_MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"
-BASE_MODEL_NAME = "sentence-transformers/all-mpnet-base-v2"
+#BASE_MODEL_NAME = "sentence-transformers/all-mpnet-base-v2"
 BATCH_SIZE = 16
-NUM_EPOCHS = (3, 32)
+NUM_EPOCHS = (2, 32)
 
 def enhance_emotional_features(text):
     """Preserve and normalize emotional language features for better embedding."""
@@ -137,10 +137,10 @@ def main():
         eval_strategy="epoch",
         save_strategy="epoch",
         load_best_model_at_end=True,
-        num_iterations=40,
+        num_iterations=20,
         loss=CosineSimilarityLoss,
-        metric_for_best_model="accuracy",
-        greater_is_better=True,
+        metric_for_best_model="embedding_loss",
+        greater_is_better=False,
         save_total_limit=1,
     )
 
