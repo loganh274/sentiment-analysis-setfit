@@ -1,4 +1,5 @@
 venv/
+.venv/
 checkpoints/
 models/setfit_sentiment_model_final/
 models/setfit_sentiment_model_safetensors/
