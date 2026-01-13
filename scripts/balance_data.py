@@ -3,7 +3,7 @@ import numpy as np
 import os
 import sys
 
-def balance_dataset(input_file, output_file, target_count=50):
+def balance_dataset(input_file, output_file, target_count=100):
     """
     Reads a CSV, balances classes to a specific count, and saves the result.
     """
@@ -91,7 +91,7 @@ def balance_dataset(input_file, output_file, target_count=50):
         print(f"Error saving file: {e}")
 
 if __name__ == "__main__":
-    INPUT_FILENAME = 'data/balanced_data_medium.csv'
-    OUTPUT_FILENAME = 'data/balanced_data_setfit_50.csv'
+    INPUT_FILENAME = 'data/balanced_dataset_large.csv'
+    OUTPUT_FILENAME = 'data/training.csv'
     
     balance_dataset(INPUT_FILENAME, OUTPUT_FILENAME)

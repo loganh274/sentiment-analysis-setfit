@@ -26,7 +26,7 @@ BASE_MODEL_NAME = "BAAI/bge-base-en-v1.5"
 #BASE_MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"
 #BASE_MODEL_NAME = "sentence-transformers/all-mpnet-base-v2"
 BATCH_SIZE = 16
-NUM_EPOCHS = (2, 32)
+NUM_EPOCHS = (1, 16)
 
 def enhance_emotional_features(text):
     """Preserve and normalize emotional language features for better embedding."""
@@ -137,7 +137,7 @@ def main():
         eval_strategy="epoch",
         save_strategy="epoch",
         load_best_model_at_end=True,
-        num_iterations=20,
+        num_iterations=10,
         loss=CosineSimilarityLoss,
         metric_for_best_model="embedding_loss",
         greater_is_better=False,
